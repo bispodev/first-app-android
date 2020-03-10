@@ -1,8 +1,10 @@
-package com.bispodev.mathquiz;
+package com.bispodev.mathquiz.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.bispodev.mathquiz.R;
 
 public class MainActivity extends AppCompatActivity {
 
