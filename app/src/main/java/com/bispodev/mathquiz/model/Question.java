@@ -17,11 +17,11 @@ public class Question {
         return text;
     }
 
-    public double getrCorreta() {
+    public double getCorreta() {
         return rCorreta;
     }
 
-    public double getrIncorreta() {
+    public double getIncorreta() {
         return rIncorreta;
     }
 }

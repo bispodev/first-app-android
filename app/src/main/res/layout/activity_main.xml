@@ -10,33 +10,36 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Question"
         android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_margin="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.13"
+        android:gravity="center_horizontal" />
 
     <Button
-        android:id="@+id/buttonIncorreto"
+        android:id="@+id/btn_incorreto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Incorreto"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/buttonCorreto"
+        app:layout_constraintLeft_toRightOf="@id/btn_correto"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.450" />
 
     <Button
-        android:id="@+id/buttonCorreto"
+        android:id="@+id/btn_correto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Correto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/buttonIncorreto"
+        app:layout_constraintRight_toLeftOf="@id/btn_incorreto"
         app:layout_constraintTop_toBottomOf="@id/textView"
         app:layout_constraintVertical_bias="0.450" />
 
