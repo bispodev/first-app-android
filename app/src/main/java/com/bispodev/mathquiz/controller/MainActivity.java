@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(savedInstanceState != null){
+            indexQuestion = savedInstanceState.getInt(INDEX);
+        }
+
         Texts(indexQuestion);
 
         // Listener resp
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 String mensagem = null;
 
                 VerifyQuestion verifyQuestion = new VerifyQuestion();
-                Question question = reporQuestion.getReporQuestion().get(savedInstanceState.getInt(INDEX));
+                Question question = reporQuestion.getReporQuestion().get(indexQuestion);
 
                 try {
                     NumberFormat format = NumberFormat.getInstance(locale);
