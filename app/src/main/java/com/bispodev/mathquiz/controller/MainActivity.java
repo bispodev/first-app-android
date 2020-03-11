@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener nextQuestion = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(reporQuestion.getReporQuestion().size() >= indexQuestion){
-                    indexQuestion ++;
-                }else{
+                indexQuestion ++;
+
+                if(reporQuestion.getReporQuestion().size() <= indexQuestion){
                     indexQuestion = 0;
                 }
 
@@ -68,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
         btnCorreto.setOnClickListener(respostaDoBtn);
         btnInorreto.setOnClickListener(respostaDoBtn);
         btnNextQuestion.setOnClickListener(nextQuestion);
-
-
-
 
     }
 
