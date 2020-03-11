@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MathQuiz</string>
+    <string name="nextQuestion">Próxima pergunta</string>
 </resources>

@@ -23,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Texts(indexQuestion);
 
-        Question question = reporQuestion.getReporQuestion().get(indexQuestion);
-        Texts(question);
         // Listener resp
         View.OnClickListener respostaDoBtn = new View.OnClickListener() {
             @Override
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     mensagem = "Parabéns, tu acertou!";
                     if(reporQuestion.getReporQuestion().size() >= indexQuestion){
                         indexQuestion ++;
+                        nextQuestion();
                     }else{
                         indexQuestion = 0;
                     }
@@ -47,21 +47,14 @@ public class MainActivity extends AppCompatActivity {
                     mensagem = "Aah, tu errou, seu burro :(";
                 }
 
-                Toast.makeText(MainActivity.this, mensagem, Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, mensagem, Toast.LENGTH_SHORT).show();
             }
         };
 
         View.OnClickListener nextQuestion = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                indexQuestion ++;
-
-                if(reporQuestion.getReporQuestion().size() <= indexQuestion){
-                    indexQuestion = 0;
-                }
-
-                Question question = reporQuestion.getReporQuestion().get(indexQuestion);
-                Texts(question);
+                nextQuestion();
             }
         };
 
@@ -71,7 +64,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void Texts(Question question){
+    private void nextQuestion(){
+        indexQuestion ++;
+        if(reporQuestion.getReporQuestion().size() <= indexQuestion){
+            indexQuestion = 0;
+        }
+        Texts(indexQuestion);
+    };
+
+    private void Texts(int index){
+        Question question = reporQuestion.getReporQuestion().get(index);
+
         txtQuestion= findViewById(R.id.textView);
         txtQuestion.setText(question.getText());
 
@@ -82,6 +85,5 @@ public class MainActivity extends AppCompatActivity {
         btnInorreto.setText(String.valueOf(question.getIncorreta()));
 
         btnNextQuestion = findViewById(R.id.nextQuestion);
-        btnNextQuestion.setText("Próxima pergunta");
     };
 }

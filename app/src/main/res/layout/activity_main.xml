@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Question"
         android:textSize="25sp"
         android:textAlignment="center"
-        android:layout_margin="50px"
+        android:layout_marginHorizontal="150dp"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -25,7 +25,6 @@
         android:id="@+id/btn_incorreto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Incorreto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/btn_correto"
         app:layout_constraintRight_toRightOf="parent"
@@ -36,7 +35,6 @@
         android:id="@+id/btn_correto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Correto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/btn_incorreto"
@@ -47,11 +45,11 @@
         android:id="@+id/nextQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Próxima pergunta"
+        android:text="@string/nextQuestion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintVertical_bias="0.650" />
+        app:layout_constraintVertical_bias="0.900" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
