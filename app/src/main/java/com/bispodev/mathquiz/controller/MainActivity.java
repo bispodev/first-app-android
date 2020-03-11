@@ -1,8 +1,10 @@
 package com.bispodev.mathquiz.controller;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,16 +15,19 @@ import com.bispodev.mathquiz.model.Question;
 import com.bispodev.mathquiz.model.ReporQuestion;
 import com.bispodev.mathquiz.model.VerifyQuestion;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String INDEX = "INDEX";
+    private final Locale locale = new Locale("pt", "BR");
     private ReporQuestion reporQuestion = new ReporQuestion();
     private int indexQuestion = 0;
-    private TextView txtQuestion;
     private Button btnCorreto, btnInorreto, btnNextQuestion;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Texts(indexQuestion);
@@ -32,21 +37,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String resposta = ((Button) v).getText().toString();
-                String mensagem;
+                String mensagem = null;
 
                 VerifyQuestion verifyQuestion = new VerifyQuestion();
-                Question question = reporQuestion.getReporQuestion().get(indexQuestion);
+                Question question = reporQuestion.getReporQuestion().get(savedInstanceState.getInt(INDEX));
 
-                if(verifyQuestion.isRespostaCorreta(question, Double.valueOf(resposta))){
-                    mensagem = "Parabéns, tu acertou!";
-                    if(reporQuestion.getReporQuestion().size() >= indexQuestion){
-                        indexQuestion ++;
-                        nextQuestion();
+                try {
+                    NumberFormat format = NumberFormat.getInstance(locale);
+                    Number number = format.parse(resposta);
+                    assert number != null;
+                    if(verifyQuestion.isRespostaCorreta(question, number.doubleValue())){
+                        mensagem = "Parabéns, tu acertou!";
+                        if(reporQuestion.getReporQuestion().size() >= indexQuestion){
+                            indexQuestion ++;
+                            nextQuestion();
+                        }else{
+                            indexQuestion = 0;
+                        }
                     }else{
-                        indexQuestion = 0;
+                        mensagem = "Aah, tu errou, seu burro :(";
                     }
-                }else{
-                    mensagem = "Aah, tu errou, seu burro :(";
+                } catch (ParseException e) {
+                    nextQuestion();
                 }
 
                 Toast.makeText(MainActivity.this, mensagem, Toast.LENGTH_SHORT).show();
@@ -66,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        outState.putInt(INDEX, indexQuestion);
+    }
+
     private void nextQuestion(){
         indexQuestion ++;
         if(reporQuestion.getReporQuestion().size() <= indexQuestion){
@@ -77,9 +96,7 @@ public class MainActivity extends AppCompatActivity {
     private void Texts(int index){
         Question question = reporQuestion.getReporQuestion().get(index);
 
-        final Locale locale = new Locale("pt", "BR");
-
-        txtQuestion= findViewById(R.id.textView);
+        TextView txtQuestion = findViewById(R.id.textView);
         txtQuestion.setText(question.getText());
 
         btnCorreto= findViewById(R.id.btn_correto);
