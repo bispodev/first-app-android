@@ -13,6 +13,8 @@ import com.bispodev.mathquiz.model.Question;
 import com.bispodev.mathquiz.model.ReporQuestion;
 import com.bispodev.mathquiz.model.VerifyQuestion;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private ReporQuestion reporQuestion = new ReporQuestion();
@@ -75,14 +77,18 @@ public class MainActivity extends AppCompatActivity {
     private void Texts(int index){
         Question question = reporQuestion.getReporQuestion().get(index);
 
+        final Locale locale = new Locale("pt", "BR");
+
         txtQuestion= findViewById(R.id.textView);
         txtQuestion.setText(question.getText());
 
         btnCorreto= findViewById(R.id.btn_correto);
-        btnCorreto.setText(String.valueOf(question.getCorreta()));
+        String respCorrect = String.format(locale, "%.2f",question.getCorreta());
+        btnCorreto.setText(respCorrect);
 
         btnInorreto = findViewById(R.id.btn_incorreto);
-        btnInorreto.setText(String.valueOf(question.getIncorreta()));
+        String respIncorrect = String.format(locale, "%.2f",question.getIncorreta());
+        btnInorreto.setText(respIncorrect);
 
         btnNextQuestion = findViewById(R.id.nextQuestion);
     };
